@@ -5,9 +5,9 @@ on:
     branches: [main]
 
 env:
-  ACCOUNT_ID: "425281906332" # set your aws account id
-  REGION: "us-east-1" # set your aws region (e.g., us-east-1)
-  REPO_NAME: "cs1660-assignment2" # set your ecr repository name
+  ACCOUNT_ID: 425281906332 # set your aws account id
+  REGION: us-east-1 # set your aws region (e.g., us-east-1)
+  REPO_NAME: cs1660-assignment2 # set your ecr repository name
 
 jobs:
   build-and-push:
@@ -30,7 +30,7 @@ jobs:
       - name: build, tag, and push to ecr
         run: |
           docker build -t $REPO_NAME:$IMAGE_TAG  .
-          
+
           docker tag $REPO_NAME:$IMAGE_TAG $REGISTRY/$REPO_NAME:$IMAGE_TAG
           docker tag $REPO_NAME:$IMAGE_TAG $REGISTRY/$REPO_NAME:latest
 
