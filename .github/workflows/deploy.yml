@@ -29,11 +29,9 @@ jobs:
 
       - name: build, tag, and push to ecr
         run: |
-          docker build -t $REPO_NAME:$IMAGE_TAG  .
-
-          docker tag $REPO_NAME:$IMAGE_TAG $REGISTRY/$REPO_NAME:$IMAGE_TAG
-          docker tag $REPO_NAME:$IMAGE_TAG $REGISTRY/$REPO_NAME:latest
-
-          docker push $REGISTRY/$REPO_NAME:$IMAGE_TAG
-          docker push $REGISTRY/$REPO_NAME:latest
+          docker build -t ${{ env.REPO_NAME }}:v1 .
+          docker tag ${{ env.REPO_NAME }}:v1 \
+            ${{ env.ACCOUNT_ID }}.dkr.ecr.${{ env.REGION }}.amazonaws.com/${{ env.REPO_NAME }}:v1
+          docker push \
+            ${{ env.ACCOUNT_ID }}.dkr.ecr.${{ env.REGION }}.amazonaws.com/${{ env.REPO_NAME }}:v1
 
